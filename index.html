@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        .car{
-            width: 100px;
-            height: 100px;
+        .dot{
+            width: 10px;
+            height: 10px;
             background: red;
         }
     </style>
@@ -20,13 +20,15 @@
     
 </body>
 <script>
-    let car = document.querySelectorAll('.car');
-    car.addEventListener('touchstart', e =>{ 
-        let car = document.querySelectorAll('.car');
+    
+    document.addEventListener('touchstart', e => { 
         [...e.changedTouches].forEach(touch => {
-            car.style.top = `${touch.pageY}px`
-            car.style.left = `${touch.pageX}px`
-            car.id = touch.identifier
+            const dot = document.createElement("div")
+            dot.classList.add('dot')
+            dot.style.top = `${touch.pageY}px`
+            dot.style.left = `${touch.pageX}px`
+            dot.id = touch.identifier
+            document.body.appendChild(dot)
 
         })
     })
@@ -35,7 +37,7 @@
         const car = document.getElementById(touch.identifier)
         car.style.top = `${touch.pageY}px`
         car.style.left = `${touch.pageX}px`
-        console.log('move')
+        
         })
     })
     document.addEventListener('touchend', e =>{
