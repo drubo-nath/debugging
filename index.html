@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .car{
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="car">
+
+    </div>
+    
+</body>
+<script>
+    let car = document.querySelectorAll('.car');
+    car.addEventListener('touchstart', e =>{ 
+        let car = document.querySelectorAll('.car');
+        [...e.changedTouches].forEach(touch => {
+            car.style.top = `${touch.pageY}px`
+            car.style.left = `${touch.pageX}px`
+            car.id = touch.identifier
+
+        })
+    })
+    document.addEventListener('touchmove', e =>{
+        [...e.changedTouches].forEach(touch => {
+        const car = document.getElementById(touch.identifier)
+        car.style.top = `${touch.pageY}px`
+        car.style.left = `${touch.pageX}px`
+        console.log('move')
+        })
+    })
+    document.addEventListener('touchend', e =>{
+        console.log('end')
+    })
+</script>
+</html>
