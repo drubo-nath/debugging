@@ -6,15 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        .dot{
-            width: 10px;
-            height: 10px;
-            background: red;
+        .car{
+            width: 100px;
+            height: 100px;
+            top: 100px;
+            left: 100px;
             position: absolute;
-            transform: translate(-50% , -50%);
-        }
-        body{
-            margin: 0;
+            background: red;
         }
     </style>
 </head>
@@ -24,29 +22,32 @@
     </div>
     
 </body>
-<script>
-    
-    document.addEventListener('touchstart', e => { 
-        [...e.changedTouches].forEach(touch => {
-            const dot = document.createElement("div")
-            dot.classList.add("dot")
-            dot.style.top = `${touch.pageY}px`
-            dot.style.left = `${touch.pageX}px`
-            dot.id = touch.identifier
-            document.body.append(dot)
+    <script>
 
-        })
-    })
-    document.addEventListener('touchmove', e => {
-        [...e.changedTouches].forEach(touch => {
-        const dot = document.getElementById(touch.identifier)
-        dot.style.top = `${touch.pageY}px`
-        dot.style.left = `${touch.pageX}px`
-        
-        })
-    })
-    document.addEventListener('touchend', e =>{
-        console.log('end')
-    })
-</script>
+
+        let player = {}
+        let car = document.querySelectorAll('.car');
+        console.log(car)
+        car[0].addEventListener('touchstart', touchstart) ;
+        function touchstart(e){ 
+            e.preventDefault();
+            player.y = car.style.top
+            player.x = car.style.left
+
+        }
+        car[0].addEventListener('touchmove',touchmove)
+        function touchmove(e){
+            e.preventDefault();
+            player.y = `${e.pageY}px`
+            player.x = `${e.pageX}px`
+            
+           
+        }
+        car[0].addEventListener('touchend',touchend)
+        function touchend(e){
+            e.preventDefault();
+            car.style.top = player.y;
+            car.style.left = player.x;
+        }
+    </script>
 </html>
